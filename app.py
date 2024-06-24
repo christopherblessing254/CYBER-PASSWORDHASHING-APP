@@ -30,13 +30,13 @@ def signup():
                 insert into users(username,email,password,title)values(%s,%s,%s,%s)
                 '''
             
-            cursor.execute(sql,(username,email,password,title))
+            cursor.execute(sql,(username,email,hash_function.hash_password(password),title))
 
             connection.commit()
             
             return render_template('signup.html', msg='Application Made Successfully')
     else:
-        # Form not posted, display the form to allow user Post something
+        # Form not posted, display the for m to allow user Post something
         return render_template('signup.html')
 
 app.run(debug=True)
